@@ -24,7 +24,10 @@ export const Contacts = () => {
 							return (
 								<ContactCard
 									key={index}
-									name={item.agenda_slug}
+									name={item.full_name}
+									phone={item.phone}
+									email={item.email}
+									address={item.address}
 									onDelete={() => setState({ showModal: true })}
 								/>
 							);
