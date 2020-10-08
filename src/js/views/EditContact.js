@@ -1,13 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import PropTypes from "prop-types";
 
-export const AddContact = () => {
+export const EditContact = props => {
 	const [contact, setContact] = useState({
-		name: "",
-		email: "",
-		phone: "",
-		address: ""
+		name: props.location.aboutProps.contact.full_name,
+		email: props.location.aboutProps.contact.email,
+		phone: props.location.aboutProps.contact.phone,
+		address: props.location.aboutProps.contact.address
 	});
 
 	const { store, actions } = useContext(Context);
@@ -15,7 +16,7 @@ export const AddContact = () => {
 	return (
 		<div className="container">
 			<div>
-				<h1 className="text-center mt-5">Add a new contact</h1>
+				<h1 className="text-center mt-5">Edit a new contact</h1>
 				<form>
 					<div className="form-group">
 						<label>Full Name</label>
@@ -24,6 +25,7 @@ export const AddContact = () => {
 							type="text"
 							className="form-control"
 							placeholder="Full Name"
+							value={contact.name}
 						/>
 					</div>
 					<div className="form-group">
@@ -33,6 +35,7 @@ export const AddContact = () => {
 							type="email"
 							className="form-control"
 							placeholder="Enter email"
+							value={contact.email}
 						/>
 					</div>
 					<div className="form-group">
@@ -42,6 +45,7 @@ export const AddContact = () => {
 							type="phone"
 							className="form-control"
 							placeholder="Enter phone"
+							value={contact.phone}
 						/>
 					</div>
 					<div className="form-group">
@@ -51,12 +55,19 @@ export const AddContact = () => {
 							type="text"
 							className="form-control"
 							placeholder="Enter address"
+							value={contact.address}
 						/>
 					</div>
 					<Link to="/">
 						<button
 							onClick={() =>
-								actions.addContact(contact.name, contact.email, contact.phone, contact.address)
+								actions.editContact(
+									contact.name,
+									contact.email,
+									contact.phone,
+									contact.address,
+									contact.id
+								)
 							}
 							type="button"
 							className="btn btn-primary form-control">
@@ -71,4 +82,7 @@ export const AddContact = () => {
 			</div>
 		</div>
 	);
+};
+EditContact.propTypes = {
+	location: PropTypes.object
 };
