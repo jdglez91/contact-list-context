@@ -58,7 +58,7 @@ const getState = ({ getStore, setStore }) => {
 						console.log("deleted");
 					});
 			},
-			editContact: (name, email, phone, address) => {
+			editContact: (name, email, phone, address, id) => {
 				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
 					method: "PUT",
 					headers: { "Content-Type": "application/json" },
